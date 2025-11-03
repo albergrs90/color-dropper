@@ -104,3 +104,26 @@ h1 {
   outline: none;
   box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5); /* Foco accesible */
 }
+
+/* Estilos para el área de resultado del color */
+.color-result {
+  width: 100%;
+  margin: 0 auto 30px;
+  padding: 15px;
+  border-radius: 8px;
+  color: white; /* Color del texto inicial, podría cambiar por el contraste */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  border: 3px solid #333; /* Borde oscuro para contraste */
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Sombra para mejor lectura del texto */
+}
+
+.color-result p {
+  margin: 5px 0;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+
+.hex-value {
+  font-size: 1.8em;
+  letter-spacing: 1px;
+}
