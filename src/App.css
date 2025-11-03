@@ -1,72 +1,95 @@
-/* src/App.css */
-
-/* Estilos globales y reseteo básico */
+/* Global styles */
 body {
-  font-family: Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f4f4f9; /* Fondo muy claro */
-  color: #333; /* Texto oscuro para buen contraste */
+  background-color: #f0f2f5;
+  color: #333;
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Alineamos arriba */
   min-height: 100vh;
 }
 
 #app-container {
-  max-width: 800px;
-  width: 90%;
-  margin-top: 40px;
-  padding: 30px;
-  background-color: #fff;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  margin: 30px 20px;
+  width: 100%;
+  max-width: 650px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+h1 {
+  color: #4a4a4a;
+  margin-bottom: 30px;
+  font-size: 2em;
+  font-weight: 600;
   text-align: center;
 }
 
-/* Título */
-h1 {
-  color: #007bff; /* Un azul primario */
-  margin-bottom: 30px;
-}
-
-/* Estilos de la Zona de Arrastre */
+/* Drag and Drop Area */
 .drop-area {
-  border: 3px dashed #ccc; /* Borde discontinuo para indicar el área */
-  border-radius: 8px;
-  padding: 50px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 200px;
+  width: 100%;
+  border: 3px dashed #a0aec0;
+  border-radius: 10px;
+  background-color: #f7fafc;
+  transition: background-color 0.3s, border-color 0.3s;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
-  background-color: #fafafa;
-  outline: none; /* Eliminar el contorno por defecto para poner uno mejor */
 }
 
-/* Efecto visual al pasar el ratón o arrastrar (Accesibilidad visual) */
-.drop-area:hover,
+.drop-area:hover {
+  border-color: #4c4c4c;
+  background-color: #e2e8f0;
+}
+
 .drop-area.dragging {
-  border-color: #007bff; /* Borde azul brillante */
-  background-color: #e6f2ff; /* Fondo ligeramente azul */
-  transform: scale(1.02); /* Efecto de "crecer" ligeramente */
+  border-color: #3182ce;
+  background-color: #ebf8ff;
 }
 
-/* Efecto de Foco (Accesibilidad de Teclado) */
-.drop-area:focus {
-  /* Mismo estilo para los usuarios que navegan con el teclado (tab) */
-  border-color: #007bff;
-  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.4); /* Anillo de foco claro */
-}
-
-/* Estilos del texto dentro de la zona de arrastre */
 .drop-area p {
-  margin: 10px 0;
-  font-size: 1.2em;
-  color: #555;
+  margin: 5px 0;
+  font-size: 1.1em;
+  color: #666;
+  user-select: none;
 }
 
-/* El label cubre toda la zona de arrastre */
 .drop-area label {
   display: block;
-  cursor: inherit;
+  padding: 20px;
+  cursor: pointer;
+}
+
+/* Image Display and Result Wrapper (NUEVO CONTENEDOR) */
+.image-display-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra horizontalmente todo el contenido */
+  /* MODIFICACIÓN CLAVE: Quitamos width: 100% y max-width para que se ajuste al contenido */
+  /* Y usamos fit-content para que se dimenione por el contenido (la imagen) */
+  width: fit-content;
+  max-width: 100%; /* Asegura que no se salga del contenedor padre si la imagen es gigante */
+  margin: 0 auto; /* Centrar el wrapper en el contenedor padre */
+}
+
+/* Contenedor de la imagen y el botón */
+.image-display-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Asegura que la imagen tome el ancho del wrapper */
+  margin-bottom: 20px; /* Espacio entre imagen y botón */
 }
 
 /* Estilos para la imagen cargada */
@@ -75,55 +98,68 @@ h1 {
   height: auto;
   border: 1px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 20px;
-  cursor: crosshair; /* Indicamos que la imagen es interactiva */
+  margin-bottom: 20px; /* Espacio entre imagen y botón */
+  cursor: crosshair;
 }
 
-/* Contenedor de la imagen y el botón */
-.image-display-area {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-/* Estilos del botón de reset */
-.reset-button {
-  background-color: #dc3545; /* Rojo de peligro/reset */
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1em;
-  transition: background-color 0.2s;
-}
-
-.reset-button:hover,
-.reset-button:focus {
-  background-color: #c82333; /* Rojo más oscuro al pasar el ratón o enfocar */
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.5); /* Foco accesible */
-}
-
-/* Estilos para el área de resultado del color */
+/* Estilos para el área de resultado del color (AHORA DENTRO del wrapper) */
 .color-result {
-  width: 100%;
-  margin: 0 auto 30px;
+  width: 85%; /* Toma el ancho del image-display-wrapper (que ahora es el ancho de la imagen) */
+  margin: 0 auto 20px; /* Centra y añade espacio inferior */
   padding: 15px;
   border-radius: 8px;
-  color: white; /* Color del texto inicial, podría cambiar por el contraste */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border: 3px solid #333; /* Borde oscuro para contraste */
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8); /* Sombra para mejor lectura del texto */
+  border: 3px solid #333;
+  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  transition: background-color 0.5s;
 }
 
 .color-result p {
-  margin: 5px 0;
-  font-weight: bold;
+  margin: 0;
   font-size: 1.1em;
+  font-weight: 500;
+  text-align: center;
 }
 
-.hex-value {
+.color-result .hex-value {
   font-size: 1.8em;
-  letter-spacing: 1px;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* Botón de reset */
+.reset-button {
+  padding: 10px 20px;
+  font-size: 1em;
+  color: white;
+  background-color: #3182ce;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.1s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.reset-button:hover {
+  background-color: #2c6cb5;
+}
+
+.reset-button:active {
+  transform: scale(0.98);
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  #app-container {
+    margin: 10px;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  .drop-area {
+    height: 150px;
+  }
 }
