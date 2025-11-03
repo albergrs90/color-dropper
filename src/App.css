@@ -1,0 +1,70 @@
+/* src/App.css */
+
+/* Estilos globales y reseteo básico */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9; /* Fondo muy claro */
+  color: #333; /* Texto oscuro para buen contraste */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Alineamos arriba */
+  min-height: 100vh;
+}
+
+#app-container {
+  max-width: 800px;
+  width: 90%;
+  margin-top: 40px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* Título */
+h1 {
+  color: #007bff; /* Un azul primario */
+  margin-bottom: 30px;
+}
+
+/* Estilos de la Zona de Arrastre */
+.drop-area {
+  border: 3px dashed #ccc; /* Borde discontinuo para indicar el área */
+  border-radius: 8px;
+  padding: 50px 20px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  background-color: #fafafa;
+  outline: none; /* Eliminar el contorno por defecto para poner uno mejor */
+}
+
+/* Efecto visual al pasar el ratón o arrastrar (Accesibilidad visual) */
+.drop-area:hover,
+.drop-area.dragging {
+  border-color: #007bff; /* Borde azul brillante */
+  background-color: #e6f2ff; /* Fondo ligeramente azul */
+  transform: scale(1.02); /* Efecto de "crecer" ligeramente */
+}
+
+/* Efecto de Foco (Accesibilidad de Teclado) */
+.drop-area:focus {
+  /* Mismo estilo para los usuarios que navegan con el teclado (tab) */
+  border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.4); /* Anillo de foco claro */
+}
+
+/* Estilos del texto dentro de la zona de arrastre */
+.drop-area p {
+  margin: 10px 0;
+  font-size: 1.2em;
+  color: #555;
+}
+
+/* El label cubre toda la zona de arrastre */
+.drop-area label {
+  display: block;
+  cursor: inherit;
+}
