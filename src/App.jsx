@@ -1,14 +1,32 @@
-import React, { useState } from "react";
+// src/App.jsx
+import React, { useState, useEffect } from "react"; // <-- AÑADIMOS 'useEffect'
 import "./App.css";
 
 function App() {
-  // 1. Estado para almacenar la imagen cargada
   const [imageFile, setImageFile] = useState(null);
-
-  // 2. Estado para manejar el efecto visual de "arrastrando sobre la zona"
   const [isDragging, setIsDragging] = useState(false);
+  // Nuevo estado para la URL de la imagen que usaremos en la etiqueta <img>
+  const [imageUrl, setImageUrl] = useState(null); // <-- NUEVO ESTADO
 
-  // Funciones placeholder que implementaremos después:
+  // Función para crear la URL y limpiar después
+  useEffect(() => {
+    if (!imageFile) {
+      // Si no hay archivo, limpiamos la URL
+      setImageUrl(null);
+      return;
+    }
+
+    // Crea una URL temporal del archivo cargado (Blob/File)
+    const objectUrl = URL.createObjectURL(imageFile);
+    setImageUrl(objectUrl);
+
+    // Función de limpieza: Se ejecuta cuando el componente se desmonta o
+    // cuando imageFile cambia para liberar memoria.
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [imageFile]); // <-- Se ejecuta cada vez que 'imageFile' cambia
+
+  // ... (handleDragOver, handleDragLeave, handleDrop, handleFileChange no cambian) ...
+
   const handleDragOver = (e) => {
     e.preventDefault();
     setIsDragging(true);
@@ -22,15 +40,12 @@ function App() {
     e.preventDefault();
     setIsDragging(false);
 
-    // Obtener el primer archivo soltado
     const files = e.dataTransfer.files;
     if (files.length > 0) {
-      // Solo tomamos el primero si se sueltan varios
       setImageFile(files[0]);
     }
   };
 
-  // Función para manejar la selección tradicional por clic en el input file
   const handleFileChange = (e) => {
     const files = e.target.files;
     if (files.length > 0) {
@@ -42,40 +57,44 @@ function App() {
     <div id="app-container" role="main">
       <h1>🎨 Color Dropper</h1>
 
-      {/* Condicional: Si no hay imagen, mostrar el área de carga */}
-      {!imageFile ? (
+      {/* Condicional: Si NO hay imagen (imageUrl), mostrar el área de carga */}
+      {!imageUrl ? ( // <-- USAMOS imageUrl para la condición
         <div
           className={`drop-area ${isDragging ? "dragging" : ""}`}
-          // Eventos de accesibilidad y Drag and Drop
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
-          // Mejorando la accesibilidad:
-          tabIndex="0" // Permite enfocar con el teclado (Tab)
+          tabIndex="0"
           aria-label="Arrastra una imagen o haz click para subir"
         >
-          {/* Usamos un label que es la zona grande de "Drop". 
-            Cuando haces click, activa el input file oculto. 
-          */}
           <label htmlFor="file-upload">
             <p>Arrastra aquí tu imagen 🖼️</p>
             <p>o haz click para seleccionar</p>
           </label>
 
-          {/* El input file real, oculto pero accesible al hacer click en el label */}
           <input
             id="file-upload"
             type="file"
-            accept="image/*" // Solo acepta archivos de imagen
+            accept="image/*"
             onChange={handleFileChange}
-            // Estilos para ocultarlo, pero aún dejarlo accesible
             style={{ display: "none" }}
           />
         </div>
       ) : (
-        // Si hay una imagen, mostramos su nombre (por ahora)
-        <div>
-          <p>Imagen cargada: **{imageFile.name}**</p>
+        // Si hay una URL, mostramos la imagen
+        <div className="image-display-area">
+          <img
+            src={imageUrl}
+            alt="Imagen cargada para selección de color"
+            className="uploaded-image"
+          />
+          <button
+            onClick={() => setImageFile(null)}
+            aria-label="Cargar una nueva imagen"
+            className="reset-button"
+          >
+            Cargar otra imagen
+          </button>
         </div>
       )}
     </div>
