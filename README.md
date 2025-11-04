@@ -1,16 +1,33 @@
-# React + Vite
+🎨 Color Dropper: Herramienta de Selección de Color de Imágenes
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+¡Bienvenido al repositorio de Color Dropper! Esta es una aplicación web simple, rápida y totalmente responsiva diseñada para que los usuarios puedan subir cualquier imagen y obtener el código de color Hexadecimal de cualquier punto de la misma. Ideal para diseñadores web, desarrolladores y cualquier persona que necesite identificar colores rápidamente.
 
-Currently, two official plugins are available:
+La aplicación está desplegada en Netlify y es accesible públicamente.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+🚀 Características Principales
 
-## React Compiler
+Selección Precisa: Haz clic en cualquier parte de la imagen subida para obtener el valor Hexadecimal exacto del píxel.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Interfaz Profesional: Diseño moderno y limpio con enfoque en la usabilidad móvil (Mobile-First Design).
 
-## Expanding the ESLint configuration
+Totalmente Responsiva: Funciona perfectamente en dispositivos de escritorio, tabletas y móviles.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Optimización SEO y Branding: Título de página, Favicon y atributos de idioma configurados profesionalmente.
+
+Analítica Integrada: Conexión con Google Analytics 4 (GA4).
+
+Monetización: Preparada para Google AdSense.
+
+🛠️ Tecnologías Utilizadas
+
+Frontend: React (Vite)
+
+Estilos: Tailwind CSS (Clases integradas)
+
+Lenguaje: JavaScript / JSX
+
+Despliegue (CI/CD): Netlify
+
+Analítica: Google Analytics 4
+
+Monetización: Google AdSense
