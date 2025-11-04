@@ -1,0 +1,19 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<title>Color Dropper Icon</title>
+<desc>Un icono de paleta de pintor con una gota de color. Representa la herramienta de selección de color.</desc>
+
+<!-- Paleta (Forma base) - Color crema/madera claro -->
+<circle cx="32" cy="32" r="28" fill="#FCE4C9" stroke="#E0C4A4" stroke-width="2"/>
+
+<!-- Agujero para el pulgar -->
+<circle cx="18" cy="40" r="5" fill="#E0C4A4"/>
+
+<!-- Manchas de color (simulando la pintura) -->
+<circle cx="45" cy="20" r="4" fill="#3B82F6"/> <!-- Azul -->
+<circle cx="25" cy="15" r="4" fill="#10B981"/> <!-- Verde -->
+<circle cx="40" cy="45" r="4" fill="#F59E0B"/> <!-- Naranja -->
+
+<!-- Gota de color central (Énfasis en 'Dropper') -->
+<path d="M32 28 C 30 20, 36 20, 32 36 L 32 40 Z" fill="#EF4444"/>
+
+</svg>
