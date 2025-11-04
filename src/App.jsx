@@ -7,7 +7,7 @@ function App() {
   const [isDragging, setIsDragging] = useState(false);
   const [imageUrl, setImageUrl] = useState(null);
 
-  // Nuevo estado para almacenar el color seleccionado (ej: '#ff0000')
+  // Nuevo estado para almacenar el color seleccionado
   const [pickedColor, setPickedColor] = useState(null);
 
   // Referencia para acceder al elemento Canvas en el DOM
@@ -159,7 +159,7 @@ function App() {
               }}
             >
               <p>Color Seleccionado:</p>
-              <p className="hex-value">**{pickedColor}**</p>
+              <p className="hex-value">{pickedColor}</p>
             </div>
           )}
 

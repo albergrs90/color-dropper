@@ -1,22 +1,35 @@
 /* Global styles */
+* {
+  /* CLAVE DE CORRECCIÓN: Asegura que el padding y el borde estén incluidos dentro del width */
+  box-sizing: border-box;
+  /* Suaviza todas las transiciones para un look más moderno */
+  transition: all 0.2s ease-in-out;
+}
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
-    Arial, sans-serif;
+  /* Usaremos Inter como fuente por defecto si está disponible, es más moderna que las fuentes del sistema */
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Helvetica, Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f0f2f5;
+  /* Fondo ligeramente más oscuro para que el contenedor blanco resalte */
+  background-color: #e9eef2;
   color: #333;
   display: flex;
   justify-content: center;
   min-height: 100vh;
+  /* CLAVE: Previene el desbordamiento horizontal en móviles */
+  overflow-x: hidden;
 }
 
 #app-container {
-  padding: 20px;
+  padding: 30px; /* Aumentamos el padding para más espacio interno */
   background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 30px 20px;
+  border-radius: 20px; /* Bordes más redondeados */
+  /* Sombra más suave y moderna (elevación sutil) */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  /* Mantener margen para escritorio */
+  margin: 40px 20px; /* Aumentamos el margen superior */
   width: 100%;
   max-width: 650px;
   display: flex;
@@ -25,10 +38,10 @@ body {
 }
 
 h1 {
-  color: #4a4a4a;
+  color: #1f2937; /* Color de texto más oscuro y profesional */
   margin-bottom: 30px;
-  font-size: 2em;
-  font-weight: 600;
+  font-size: 2.2em; /* Título un poco más grande */
+  font-weight: 700; /* Más audaz */
   text-align: center;
 }
 
@@ -39,30 +52,33 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
-  height: 200px;
+  height: 220px; /* Un poco más alta */
   width: 100%;
-  border: 3px dashed #a0aec0;
-  border-radius: 10px;
-  background-color: #f7fafc;
-  transition: background-color 0.3s, border-color 0.3s;
+  /* Borde más sutil y color primario */
+  border: 3px dashed #7b9ed9;
+  border-radius: 15px;
+  background-color: #fcfdfe;
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
   cursor: pointer;
 }
 
 .drop-area:hover {
-  border-color: #4c4c4c;
-  background-color: #e2e8f0;
+  border-color: #3b82f6; /* Borde de color primario más vivo */
+  background-color: #f0f7ff;
+  box-shadow: 0 0 10px rgba(59, 130, 246, 0.2); /* Sombra al pasar el ratón */
 }
 
 .drop-area.dragging {
-  border-color: #3182ce;
-  background-color: #ebf8ff;
+  border-color: #10b981; /* Color verde de éxito al arrastrar */
+  background-color: #ecfdf5;
 }
 
 .drop-area p {
-  margin: 5px 0;
-  font-size: 1.1em;
-  color: #666;
+  margin: 8px 0;
+  font-size: 1.2em;
+  color: #4b5563;
   user-select: none;
+  font-weight: 500;
 }
 
 .drop-area label {
@@ -71,16 +87,15 @@ h1 {
   cursor: pointer;
 }
 
-/* Image Display and Result Wrapper (NUEVO CONTENEDOR) */
+/* Image Display and Result Wrapper */
 .image-display-wrapper {
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra horizontalmente todo el contenido */
-  /* MODIFICACIÓN CLAVE: Quitamos width: 100% y max-width para que se ajuste al contenido */
-  /* Y usamos fit-content para que se dimenione por el contenido (la imagen) */
+  align-items: center;
+  /* El ancho en escritorio debe ser fit-content para ajustarse a la imagen */
   width: fit-content;
-  max-width: 100%; /* Asegura que no se salga del contenedor padre si la imagen es gigante */
-  margin: 0 auto; /* Centrar el wrapper en el contenedor padre */
+  max-width: 100%;
+  margin: 0 auto;
 }
 
 /* Contenedor de la imagen y el botón */
@@ -88,78 +103,150 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%; /* Asegura que la imagen tome el ancho del wrapper */
-  margin-bottom: 20px; /* Espacio entre imagen y botón */
+  width: 100%;
+  margin-bottom: 30px; /* Más espacio */
 }
 
 /* Estilos para la imagen cargada */
 .uploaded-image {
   max-width: 100%;
   height: auto;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  margin-bottom: 20px; /* Espacio entre imagen y botón */
+  border: 5px solid #ffffff; /* Borde blanco para enmarcarla */
+  border-radius: 12px;
+  margin-bottom: 20px;
   cursor: crosshair;
+  /* Sombra más definida para la imagen */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  /* Optimización táctil: Prevenir el zoom accidental en la imagen */
+  touch-action: manipulation;
 }
 
-/* Estilos para el área de resultado del color (AHORA DENTRO del wrapper) */
+/* Estilos para el área de resultado del color */
 .color-result {
-  width: 85%; /* Toma el ancho del image-display-wrapper (que ahora es el ancho de la imagen) */
-  margin: 0 auto 20px; /* Centra y añade espacio inferior */
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-  border: 3px solid #333;
-  text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+  /* Se elimina fit-content para usar 100% del padre */
+  width: 100%;
+  max-width: 100%;
+  /* Se ajusta el margen para centrado en el flujo normal */
+  margin: 0 auto 30px; /* Más margen abajo */
+  padding: 20px; /* Más padding para que la caja sea más alta */
+  border-radius: 12px;
+  /* Sombra más sutil y limpia */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border: none; /* Quitamos el borde sólido */
   transition: background-color 0.5s;
+  /* Aplicamos un gradiente sutil al texto */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .color-result p {
   margin: 0;
-  font-size: 1.1em;
-  font-weight: 500;
+  font-size: 1.2em;
+  font-weight: 400; /* Menos peso para la etiqueta */
   text-align: center;
 }
 
 .color-result .hex-value {
-  font-size: 1.8em;
-  font-weight: bold;
+  font-size: 2.2em; /* Más grande y prominente */
+  font-weight: 800; /* Muy audaz */
   margin-top: 5px;
 }
 
 /* Botón de reset */
 .reset-button {
-  padding: 10px 20px;
-  font-size: 1em;
+  padding: 12px 25px; /* Más grande */
+  font-size: 1.1em;
+  font-weight: 600;
   color: white;
-  background-color: #3182ce;
+  /* Color primario más vibrante */
+  background-color: #3b82f6;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.1s;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s, transform 0.1s, box-shadow 0.3s;
+  /* Sombra de botón */
+  box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+  /* Ajuste para que el botón sea más fácil de pulsar en móvil */
+  min-width: 200px;
+  min-height: 48px; /* Tamaño mínimo de toque recomendado */
+  /* Aseguramos que el margen sea auto para centrarlo si el área es más ancha */
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .reset-button:hover {
-  background-color: #2c6cb5;
+  background-color: #2563eb;
+  box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
 }
 
 .reset-button:active {
   transform: scale(0.98);
+  box-shadow: 0 2px 5px rgba(59, 130, 246, 0.5);
 }
 
-/* Responsive adjustments */
+/* Responsive adjustments (Para móviles pequeños y tablets) */
 @media (max-width: 600px) {
   #app-container {
-    margin: 10px;
-    padding: 15px;
+    /* Eliminamos los márgenes por completo para evitar desbordamiento */
+    margin: 0;
+    padding: 10px; /* Reducimos el padding general en móvil */
+    /* Aseguramos que el contenedor ocupe el 100% del ancho del viewport */
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
   }
 
+  .image-display-wrapper {
+    /* En móvil, forzamos que el wrapper sea 100% para que la imagen se ajuste correctamente */
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+  }
+
+  /* Esta regla ahora es CLAVE: Forzamos el color-result a usar el ancho del app-container en móvil */
+  .color-result {
+    /* Ocupa el 100% del #app-container que ahora tiene padding: 10px */
+    width: 100%;
+    margin: 0 0 20px 0; /* Ajustamos el margen */
+    /* Quitamos el box-shadow y el borde para un look más de aplicación nativa */
+    box-shadow: none;
+    border: none;
+    border-radius: 0;
+    /* IMPORTANTE: El padding interno debe ser el mismo que el del contenedor si queremos que se vea de borde a borde */
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  /* Añado un padding interno al contenido del color-result si eliminamos el padding del elemento padre, para que el texto no se pegue */
+  .color-result p {
+    padding-left: 10px; /* Ajustamos padding al nuevo padding del app-container */
+    padding-right: 10px;
+    font-size: 1em;
+  }
+
+  /* Ajustes adicionales para móvil */
+
   h1 {
-    font-size: 1.5em;
+    font-size: 1.8em;
+    margin-bottom: 20px;
   }
 
   .drop-area {
-    height: 150px;
+    height: 180px;
+    border-radius: 10px;
+  }
+
+  .drop-area p {
+    font-size: 1em;
+  }
+
+  .color-result .hex-value {
+    font-size: 1.8em;
+  }
+
+  .reset-button {
+    font-size: 1em;
+    min-width: 180px;
+    min-height: 44px;
   }
 }
